@@ -22,7 +22,20 @@ from email_preprocess import preprocess
 features_train, features_test, labels_train, labels_test = preprocess()
 
 
+from sklearn.naive_bayes import GaussianNB
 
+clf = GaussianNB()
+t = time()
+clf.fit(features_train, labels_train)
+print "training time: ", round(time() - t, 3), "s"
+
+t = time()
+res = clf.predict(features_test)
+print "prediction time: ", round(time() - t, 3), "s"
+
+from sklearn.metrics import accuracy_score
+
+print "accuracy: ",accuracy_score(labels_test, res)
 
 #########################################################
 ### your code goes here ###
